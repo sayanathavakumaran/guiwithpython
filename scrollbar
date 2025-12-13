@@ -1,0 +1,27 @@
+from tkinter import *
+
+screen = Tk()
+screen.geometry("500x400")
+screen.config(background="maroon")
+
+#scrollbar
+
+titlelabel = Label(screen,text="flowers",background="maroon",font=("calibri",15,"bold"),fg="blanched almond")
+
+scrollbar=Scrollbar(screen)
+
+scrollbar.pack(side=RIGHT,fill=Y)
+
+listbox = Listbox(screen,height=10,yscrollcommand=scrollbar.set)
+for x in range(23):
+    listbox.insert(END,x)
+
+scrollbar.config(background="maroon",command=listbox.yview)
+
+listbox.pack()
+
+
+
+
+
+screen.mainloop()
