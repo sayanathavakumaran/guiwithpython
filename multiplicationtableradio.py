@@ -2,15 +2,19 @@ from tkinter import *
 from tkinter.ttk import *
 
 screen = Tk()
-screen.geometry("500x300")
+screen.geometry("500x700")
 
 
 def multiplication():
     table = ""
     radiovalue = radiobuttonvalues.get()
-    for x in range(radiovalue+1):
+    for x in range(1,radiovalue+1):
+        calc = x*comboboxvalues.get()
+        table += str(comboboxvalues.get()) + " x " + str(x) + " = " + str(calc) + "\n"
+    multitable.config(text=table)
         
-
+multitable = Label(screen,text="",font=("calibri",15,"bold"))
+multitable.place(x=220,y=255)
 
 title = Label(screen,text="multiplication table")
 title.place(x=210,y=30)
@@ -33,7 +37,7 @@ radiobutton2.place(x=380,y=130)
 radiobutton3 = Radiobutton(screen,text="15",variable=radiobuttonvalues,value=15)
 radiobutton3.place(x=380,y=160)
 
-submit = Button(screen,text="submit")
+submit = Button(screen,text="submit",command=multiplication)
 submit.place(x=220,y=200)
 
 screen.mainloop()
