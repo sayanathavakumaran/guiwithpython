@@ -16,16 +16,22 @@ def delete():
     listbox.delete(choice)
 
 def open():
-    dialogbox = askopenfile("open a file")
+    dialogbox = askopenfile(title="open a file")
     if dialogbox is not None:
         listbox.delete(0,END)
         filecontents = dialogbox.readlines()
-        for i in filecontents():
+        for i in filecontents:
             listbox.insert(END,i.strip())
-            
+
+def save():
+    dialogbox = asksaveasfile(defaultextension=".txt")
+    if dialogbox is not None:
+        for i in listbox.get(0,END):
+            print(i.strip(),file=dialogbox)
+            listbox.delete(0,END)
 
 openbutton = Button(screen,text="open",command=open)
-savebutton = Button(screen,text="save")
+savebutton = Button(screen,text="save",command=save)
 addbutton = Button(screen,text="add",command=add)
 deletebutton = Button(screen,text="delete",command=delete)
 entrybox = Entry(screen)
