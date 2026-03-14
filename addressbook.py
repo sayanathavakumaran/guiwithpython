@@ -81,13 +81,16 @@ def save():
         messagebox.showerror("error!","address book is not saved")
 
 def open():
+    global details
     reset()
     dialogbox = askopenfile(title="open a file")
     if dialogbox:
         details = ast.literal_eval(dialogbox.read())
         for key in details.keys():
             listbox.insert(END,key)
-        titlelabel.configure(text=os.path.basename(dialogbox.name()))
+        titlelabel.configure(text=os.path.basename(dialogbox.name))
+    else:
+        messagebox.showerror("error!","open an address book")
 
 #designing
 
