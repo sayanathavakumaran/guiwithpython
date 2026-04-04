@@ -10,6 +10,7 @@ screen.geometry("600x500")
 screen.config(bg="black")
 
 textt = ""
+num = 0
 
 #functions
 def reset():
@@ -24,26 +25,30 @@ def trans():
         audio = recog.listen(source)
         print("start speaking...")
         try:
-            textt = (recog.recognizer_google(audio)).lower()
+            textt = recog.recognize_google(audio).lower()
+            print(textt)
             return textt
             #if textt != "up" or textt != "add" or textt != "down" or textt != "minus":
              #   messagebox.showerror("error","command not recognised")
         except:
-            print("voice not recognised")
+           messagebox.showerror("error","command not recognised")
+           return ""
         
-
+#== "up" or t == "add":
+#== "down" or t == "minus"
 
 def work():
     global textt
-    num = 0
-    trans()
-    if textt == "up" or textt == "add":
+    global num
+    t = trans()
+    if t in ["up","add"]:
         num += 1
-        numlab.config(text=str(num))
-    if textt == "down" or textt == "minus":
+    elif t in ["down","minus"]:
         num -= 1
-        numlab.config(text=str(num))
-
+    else:
+        messagebox.showerror("error","command not recognised")
+    numlab.config(text=str(num))
+    
 #design
 numlab = tk.Label(screen,text="0",font=("calibri",100,"bold"),fg="white",bg="black")
 numlab.place(x=260,y=80)
