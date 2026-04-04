@@ -14,6 +14,7 @@ num = 0
 
 #functions
 def reset():
+    global num
     num = 0
     numlab.config(text=str(num))
 
@@ -21,9 +22,9 @@ def trans():
     global textt
     recog = sr.Recognizer()
     with sr.Microphone() as source:
+        print("start speaking...")
         screen.update()
         audio = recog.listen(source)
-        print("start speaking...")
         try:
             textt = recog.recognize_google(audio).lower()
             print(textt)
@@ -41,12 +42,12 @@ def work():
     global textt
     global num
     t = trans()
-    if t in ["up","add"]:
+    if t in ["increase"]:
         num += 1
-    elif t in ["down","minus"]:
+    elif t in ["decrease"]:
         num -= 1
-    else:
-        messagebox.showerror("error","command not recognised")
+    #else:
+        #messagebox.showerror("error","command not recognised")
     numlab.config(text=str(num))
     
 #design
